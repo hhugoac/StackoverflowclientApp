@@ -1,7 +1,7 @@
 package com.hugo.stackoverflowclient.mvc.screens.questionslist;
 
 import android.os.Bundle;
-import android.widget.ListView;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.hugo.stackoverflowclient.R;
@@ -21,28 +21,26 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class QuestionsListActivity extends BaseActivity implements
-        QuestionsListAdapter.OnQuestionClickListener{
+public class QuestionsListActivity extends BaseActivity implements QuestionsLisViewMvcImpl.Listener {
 
     private StackoverflowApi mStackoverflowApi;
 
-    private ListView mLstQuestions;
-    private QuestionsListAdapter mQuestionsListAdapter;
-
+    private QuestionsLisViewMvc mViewMvc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_questions_list);
 
-        mLstQuestions = findViewById(R.id.lst_questions);
-        mQuestionsListAdapter = new QuestionsListAdapter(this, this);
-        mLstQuestions.setAdapter(mQuestionsListAdapter);
+
+        mViewMvc = new QuestionsLisViewMvcImpl(LayoutInflater.from(this), null);
+        mViewMvc.registerListener(this);
 
         mStackoverflowApi = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(StackoverflowApi.class);
+
+        setContentView(mViewMvc.getRootView());
     }
 
     @Override
@@ -75,9 +73,7 @@ public class QuestionsListActivity extends BaseActivity implements
         for (QuestionSchema questionSchema : questionSchemas) {
             questions.add(new Question(questionSchema.getId(), questionSchema.getTitle()));
         }
-        mQuestionsListAdapter.clear();
-        mQuestionsListAdapter.addAll(questions);
-        mQuestionsListAdapter.notifyDataSetChanged();
+        mViewMvc.bindQuestions(questions);
     }
 
     private void networkCallFailed() {
