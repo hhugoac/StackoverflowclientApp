@@ -13,7 +13,8 @@ import androidx.annotation.Nullable;
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
 
-public class QuestionsListAdapter extends ArrayAdapter<Question> {
+public class QuestionsListAdapter extends ArrayAdapter<Question>
+implements QuestionsListItemViewMvc.Listener{
 
     private final OnQuestionClickListener mOnQuestionClickListener;
 
@@ -31,15 +32,20 @@ public class QuestionsListAdapter extends ArrayAdapter<Question> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.layout_question_list_item, parent, false);
+            QuestionsListItemViewMvc viewMvc = new QuestionsListItemViewMvcImpl(
+                    LayoutInflater.from(getContext()), parent
+            );
+
+            viewMvc.registerListener(this);
+            convertView = viewMvc.getRootView();
+            convertView.setTag(viewMvc);
         }
 
         final Question question = getItem(position);
 
         // bind the data to views
-        TextView txtTitle = convertView.findViewById(R.id.txt_title);
-        txtTitle.setText(question.getTitle());
+        QuestionsListItemViewMvc viewMvc = (QuestionsListItemViewMvc) convertView.getTag();
+        viewMvc.bindQuestion(question);
 
         // set listener
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +58,8 @@ public class QuestionsListAdapter extends ArrayAdapter<Question> {
         return convertView;
     }
 
-    private void onQuestionClicked(Question question) {
+    @Override
+    public void onQuestionClicked(Question question) {
         mOnQuestionClickListener.onQuestionClicked(question);
     }
 
