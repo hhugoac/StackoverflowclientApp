@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Stackoverflow Client</string>
+    <string name="error_network_call_failed">Error de red</string>
+</resources>
