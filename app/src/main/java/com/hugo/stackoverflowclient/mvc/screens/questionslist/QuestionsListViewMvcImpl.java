@@ -4,31 +4,30 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
+import com.hugo.stackoverflowclient.mvc.screens.common.BaseViewMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionsLisViewMvcImpl implements
+public class QuestionsListViewMvcImpl extends BaseViewMvc implements
         QuestionsRecyclerAdapter.Listener,
-        QuestionsLisViewMvc {
+        QuestionsListViewMvc {
 
     private final List<Listener> mListeners = new ArrayList<>(1);
-    private final View rootView;
 
     private RecyclerView mRecyclerQuestions;
     private QuestionsRecyclerAdapter mAdapter;
     //private ListView mLstQuestions;
     //private QuestionsListAdapter mQuestionsListAdapter;
 
-    public QuestionsLisViewMvcImpl(LayoutInflater inflater, ViewGroup parent) {
-        rootView = inflater.inflate(R.layout.layout_questions_list, parent, false);
+    public QuestionsListViewMvcImpl(LayoutInflater inflater, ViewGroup parent) {
+        setmRootView(inflater.inflate(R.layout.layout_questions_list, parent, false));
         /*mLstQuestions = findViewById(R.id.lst_questions);
         mQuestionsListAdapter = new QuestionsListAdapter(getContext(), this);
         mLstQuestions.setAdapter(mQuestionsListAdapter);*/
@@ -36,29 +35,6 @@ public class QuestionsLisViewMvcImpl implements
         mRecyclerQuestions.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new QuestionsRecyclerAdapter(inflater, this);
         mRecyclerQuestions.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void registerListener(Listener listener) {
-        mListeners.add(listener);
-    }
-
-    @Override
-    public void unregisterListener(Listener listener) {
-        mListeners.remove(listener);
-    }
-
-    private Context getContext() {
-        return getRootView().getContext();
-    }
-
-    private <T extends View> T findViewById(int id) {
-        return getRootView().findViewById(id);
-    }
-
-    @Override
-    public View getRootView() {
-        return rootView;
     }
 
     @Override
@@ -75,5 +51,15 @@ public class QuestionsLisViewMvcImpl implements
         mQuestionsListAdapter.clear();
         mQuestionsListAdapter.addAll(questions);
         mQuestionsListAdapter.notifyDataSetChanged();*/
+    }
+
+    @Override
+    public void registerListener(Listener listener) {
+        mListeners.add(listener);
+    }
+
+    @Override
+    public void unregisterListener(Listener listener) {
+        mListeners.remove(listener);
     }
 }

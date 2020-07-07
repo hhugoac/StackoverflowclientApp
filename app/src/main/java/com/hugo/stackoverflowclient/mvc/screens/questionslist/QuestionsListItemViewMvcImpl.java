@@ -7,13 +7,14 @@ import android.widget.TextView;
 
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
+import com.hugo.stackoverflowclient.mvc.screens.common.BaseViewMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionsListItemViewMvcImpl implements QuestionsListItemViewMvc{
-
-    private final View mRootView;
+public class QuestionsListItemViewMvcImpl
+        extends BaseViewMvc
+        implements QuestionsListItemViewMvc {
 
     private final List<Listener> mListeners = new ArrayList<>(1);
     private final TextView mTxtTitle;
@@ -21,7 +22,7 @@ public class QuestionsListItemViewMvcImpl implements QuestionsListItemViewMvc{
     private Question mQuestion;
 
     public QuestionsListItemViewMvcImpl(LayoutInflater inflater, ViewGroup parent) {
-        mRootView = inflater.inflate(R.layout.layout_question_list_item, parent, false);
+        setmRootView(inflater.inflate(R.layout.layout_question_list_item, parent, false));
         mTxtTitle = findViewById(R.id.txt_title);
         getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,15 +32,6 @@ public class QuestionsListItemViewMvcImpl implements QuestionsListItemViewMvc{
                 }
             }
         });
-    }
-
-    private <T extends View> T findViewById(int id) {
-        return getRootView().findViewById(id);
-    }
-
-    @Override
-    public View getRootView() {
-        return mRootView;
     }
 
     @Override

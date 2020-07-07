@@ -21,17 +21,17 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class QuestionsListActivity extends BaseActivity implements QuestionsLisViewMvcImpl.Listener {
+public class QuestionsListActivity extends BaseActivity implements QuestionsListViewMvcImpl.Listener {
 
     private StackoverflowApi mStackoverflowApi;
 
-    private QuestionsLisViewMvc mViewMvc;
+    private QuestionsListViewMvc mViewMvc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
-        mViewMvc = new QuestionsLisViewMvcImpl(LayoutInflater.from(this), null);
+        mViewMvc = new QuestionsListViewMvcImpl(LayoutInflater.from(this), null);
         mViewMvc.registerListener(this);
 
         mStackoverflowApi = new Retrofit.Builder()
