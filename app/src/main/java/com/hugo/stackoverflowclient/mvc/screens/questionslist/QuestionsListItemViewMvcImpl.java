@@ -7,16 +7,16 @@ import android.widget.TextView;
 
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
+import com.hugo.stackoverflowclient.mvc.screens.common.BaseObservableViewMvc;
 import com.hugo.stackoverflowclient.mvc.screens.common.BaseViewMvc;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsListItemViewMvcImpl
-        extends BaseViewMvc
+        extends BaseObservableViewMvc<QuestionsListItemViewMvc.Listener>
         implements QuestionsListItemViewMvc {
 
-    private final List<Listener> mListeners = new ArrayList<>(1);
     private final TextView mTxtTitle;
 
     private Question mQuestion;
@@ -27,21 +27,11 @@ public class QuestionsListItemViewMvcImpl
         getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(Listener listener : mListeners) {
+                for(Listener listener : getListeners()) {
                     listener.onQuestionClicked(mQuestion);
                 }
             }
         });
-    }
-
-    @Override
-    public void registerListener(Listener listener) {
-        mListeners.add(listener);
-    }
-
-    @Override
-    public void unregisterListener(Listener listener) {
-        mListeners.remove(listener);
     }
 
     @Override
