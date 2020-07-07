@@ -6,25 +6,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionsLisViewMvcImpl implements QuestionsListAdapter.OnQuestionClickListener, QuestionsLisViewMvc {
+public class QuestionsLisViewMvcImpl implements
+        QuestionsRecyclerAdapter.Listener,
+        QuestionsLisViewMvc {
 
     private final List<Listener> mListeners = new ArrayList<>(1);
     private final View rootView;
 
-    private ListView mLstQuestions;
-    private QuestionsListAdapter mQuestionsListAdapter;
+    private RecyclerView mRecyclerQuestions;
+    private QuestionsRecyclerAdapter mAdapter;
+    //private ListView mLstQuestions;
+    //private QuestionsListAdapter mQuestionsListAdapter;
 
     public QuestionsLisViewMvcImpl(LayoutInflater inflater, ViewGroup parent) {
         rootView = inflater.inflate(R.layout.layout_questions_list, parent, false);
-        mLstQuestions = findViewById(R.id.lst_questions);
+        /*mLstQuestions = findViewById(R.id.lst_questions);
         mQuestionsListAdapter = new QuestionsListAdapter(getContext(), this);
-        mLstQuestions.setAdapter(mQuestionsListAdapter);
+        mLstQuestions.setAdapter(mQuestionsListAdapter);*/
+        mRecyclerQuestions = findViewById(R.id.recycler_questions);
+        mRecyclerQuestions.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new QuestionsRecyclerAdapter(inflater, this);
+        mRecyclerQuestions.setAdapter(mAdapter);
     }
 
     @Override
@@ -59,8 +70,10 @@ public class QuestionsLisViewMvcImpl implements QuestionsListAdapter.OnQuestionC
 
     @Override
     public void bindQuestions(List<Question> questions) {
+        mAdapter.bindQuestions(questions);
+        /*
         mQuestionsListAdapter.clear();
         mQuestionsListAdapter.addAll(questions);
-        mQuestionsListAdapter.notifyDataSetChanged();
+        mQuestionsListAdapter.notifyDataSetChanged();*/
     }
 }
