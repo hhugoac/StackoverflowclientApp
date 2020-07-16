@@ -8,10 +8,6 @@ import android.widget.TextView;
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
 import com.hugo.stackoverflowclient.mvc.screens.common.BaseObservableViewMvc;
-import com.hugo.stackoverflowclient.mvc.screens.common.BaseViewMvc;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class QuestionsListItemViewMvcImpl
         extends BaseObservableViewMvc<QuestionsListItemViewMvc.Listener>

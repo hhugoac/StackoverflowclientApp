@@ -11,6 +11,7 @@ import com.hugo.stackoverflowclient.mvc.networking.QuestionsListResponseSchema;
 import com.hugo.stackoverflowclient.mvc.networking.StackoverflowApi;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
 import com.hugo.stackoverflowclient.mvc.screens.common.BaseActivity;
+import com.hugo.stackoverflowclient.mvc.screens.questiondetails.QuestionDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,16 +31,10 @@ public class QuestionsListActivity extends BaseActivity implements QuestionsList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        mViewMvc = new QuestionsListViewMvcImpl(LayoutInflater.from(this), null);
+        mViewMvc = getCompositionRoot().getViewMvcFactory().getQuestionListItemViewMvc(null);
         mViewMvc.registerListener(this);
 
-        mStackoverflowApi = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(StackoverflowApi.class);
-
+        mStackoverflowApi = getCompositionRoot().getStackOverflowApi();
         setContentView(mViewMvc.getRootView());
     }
 
@@ -82,6 +77,6 @@ public class QuestionsListActivity extends BaseActivity implements QuestionsList
 
     @Override
     public void onQuestionClicked(Question question) {
-        Toast.makeText(this, question.getTitle(), Toast.LENGTH_SHORT).show();
+        QuestionDetailsActivity.start(this, question.getId());
     }
 }
