@@ -1,14 +1,14 @@
-package com.hugo.stackoverflowclient.mvc.screens.common;
+package com.hugo.stackoverflowclient.mvc.screens.common.toasthelper;
 
 import android.content.Context;
 import android.widget.Toast;
 
 import com.hugo.stackoverflowclient.R;
 
-public class MessagesDisplayer {
+public class ToastHelper {
     private final Context mContext;
 
-    public MessagesDisplayer(Context context) {
+    public ToastHelper(Context context) {
         mContext = context;
     }
 

@@ -1,4 +1,4 @@
-package com.hugo.stackoverflowclient.mvc.screens.common;
+package com.hugo.stackoverflowclient.mvc.screens.common.views;
 
 import android.content.Context;
 import android.view.View;

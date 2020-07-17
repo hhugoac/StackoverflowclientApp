@@ -1,6 +1,7 @@
-package com.hugo.stackoverflowclient.mvc.networking;
+package com.hugo.stackoverflowclient.mvc.networking.questions;
 
 import com.google.gson.annotations.SerializedName;
+import com.hugo.stackoverflowclient.mvc.networking.questions.QuestionSchema;
 
 import java.util.List;
 

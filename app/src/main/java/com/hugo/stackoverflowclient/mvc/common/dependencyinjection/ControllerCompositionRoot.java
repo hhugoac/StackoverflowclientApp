@@ -1,11 +1,16 @@
 package com.hugo.stackoverflowclient.mvc.common.dependencyinjection;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 
 import com.hugo.stackoverflowclient.mvc.networking.StackoverflowApi;
+import com.hugo.stackoverflowclient.mvc.questions.FetchLastActiveQuestionUseCase;
 import com.hugo.stackoverflowclient.mvc.questions.FetchQuestionDetailsUseCase;
+import com.hugo.stackoverflowclient.mvc.screens.common.toasthelper.ToastHelper;
+import com.hugo.stackoverflowclient.mvc.screens.common.screensnavigator.ScreensNavigator;
 import com.hugo.stackoverflowclient.mvc.screens.common.ViewMvcFactory;
+import com.hugo.stackoverflowclient.mvc.screens.questionslist.QuestionsListController;
 
 public class ControllerCompositionRoot {
     
@@ -17,8 +22,7 @@ public class ControllerCompositionRoot {
         mActivity = activity;
     }
 
-
-    public StackoverflowApi getStackOverflowApi() {
+    private StackoverflowApi getStackOverflowApi() {
         return mCompositionRoot.getStackOverflowApi();
     }
 
@@ -32,5 +36,29 @@ public class ControllerCompositionRoot {
 
     public FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase() {
         return new FetchQuestionDetailsUseCase(getStackOverflowApi());
+    }
+
+    public FetchLastActiveQuestionUseCase getfetchLastActiveQuestionUseCase() {
+        return new FetchLastActiveQuestionUseCase(getStackOverflowApi());
+    }
+
+    public QuestionsListController getQuestionsListViewMvc() {
+        return new QuestionsListController(
+                getfetchLastActiveQuestionUseCase(),
+                getScreenNavigator(),
+                getMessageDisplayer()
+        );
+    }
+
+    private Context getContext() {
+        return mActivity;
+    }
+
+    public ToastHelper getMessageDisplayer() {
+        return new ToastHelper(getContext());
+    }
+
+    private ScreensNavigator getScreenNavigator() {
+        return new ScreensNavigator(getContext());
     }
 }

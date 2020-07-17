@@ -1,8 +1,8 @@
 package com.hugo.stackoverflowclient.mvc.questions;
 
 import com.hugo.stackoverflowclient.mvc.common.BaseObservable;
-import com.hugo.stackoverflowclient.mvc.networking.QuestionSchema;
-import com.hugo.stackoverflowclient.mvc.networking.QuestionsDetailsResponseSchema;
+import com.hugo.stackoverflowclient.mvc.networking.questions.QuestionSchema;
+import com.hugo.stackoverflowclient.mvc.networking.questions.QuestionsDetailsResponseSchema;
 import com.hugo.stackoverflowclient.mvc.networking.StackoverflowApi;
 
 import retrofit2.Call;

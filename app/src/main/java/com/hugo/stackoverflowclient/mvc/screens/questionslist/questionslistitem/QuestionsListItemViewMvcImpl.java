@@ -1,14 +1,13 @@
-package com.hugo.stackoverflowclient.mvc.screens.questionslist;
+package com.hugo.stackoverflowclient.mvc.screens.questionslist.questionslistitem;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
-import com.hugo.stackoverflowclient.mvc.screens.common.BaseObservableViewMvc;
+import com.hugo.stackoverflowclient.mvc.screens.common.views.BaseObservableViewMvc;
 
 public class QuestionsListItemViewMvcImpl
         extends BaseObservableViewMvc<QuestionsListItemViewMvc.Listener>

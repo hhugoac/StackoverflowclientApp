@@ -1,4 +1,4 @@
-package com.hugo.stackoverflowclient.mvc;
+package com.hugo.stackoverflowclient.mvc.common;
 
 import android.app.Application;
 

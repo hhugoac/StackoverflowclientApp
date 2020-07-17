@@ -1,4 +1,4 @@
-package com.hugo.stackoverflowclient.mvc.networking;
+package com.hugo.stackoverflowclient.mvc.networking.user;
 
 import com.google.gson.annotations.SerializedName;
 

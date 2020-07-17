@@ -3,21 +3,13 @@ package com.hugo.stackoverflowclient.mvc.screens.questiondetails;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.hugo.stackoverflowclient.R;
-import com.hugo.stackoverflowclient.mvc.networking.QuestionSchema;
-import com.hugo.stackoverflowclient.mvc.networking.QuestionsDetailsResponseSchema;
-import com.hugo.stackoverflowclient.mvc.networking.StackoverflowApi;
 import com.hugo.stackoverflowclient.mvc.questions.FetchQuestionDetailsUseCase;
 import com.hugo.stackoverflowclient.mvc.questions.QuestionDetails;
-import com.hugo.stackoverflowclient.mvc.screens.common.BaseActivity;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.hugo.stackoverflowclient.mvc.screens.common.controllers.BaseActivity;
+import com.hugo.stackoverflowclient.mvc.screens.common.toasthelper.ToastHelper;
 
 public class QuestionDetailsActivity extends BaseActivity implements FetchQuestionDetailsUseCase.Listener {
 
@@ -28,10 +20,13 @@ public class QuestionDetailsActivity extends BaseActivity implements FetchQuesti
 
     private FetchQuestionDetailsUseCase mFetchQuestionDetailsUseCase;
 
+    private ToastHelper mToastHelper;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFetchQuestionDetailsUseCase = getCompositionRoot().getFetchQuestionDetailsUseCase();
+        mToastHelper = getCompositionRoot().getMessageDisplayer();
         mViewMvc = getCompositionRoot().getViewMvcFactory().getQuestionDetailsViewMvc(null);
         setContentView(mViewMvc.getRootView());
     }
@@ -50,9 +45,6 @@ public class QuestionDetailsActivity extends BaseActivity implements FetchQuesti
         mFetchQuestionDetailsUseCase.unregisterListener(this);
     }
 
-    private void fetchQuestionDetails() {
-
-    }
 
     private void bindQuestionDetails(QuestionDetails questionDetails) {
         mViewMvc.hideProgressIndication();
@@ -78,6 +70,6 @@ public class QuestionDetailsActivity extends BaseActivity implements FetchQuesti
     @Override
     public void onQuestionsDetailsFetchFailed() {
         mViewMvc.hideProgressIndication();
-        Toast.makeText(this, R.string.error_network_call_failed, Toast.LENGTH_SHORT).show();
+        mToastHelper.showUseCaseError();
     }
 }

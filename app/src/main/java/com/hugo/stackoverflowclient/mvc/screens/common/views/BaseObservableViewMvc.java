@@ -1,11 +1,11 @@
-package com.hugo.stackoverflowclient.mvc.screens.common;
+package com.hugo.stackoverflowclient.mvc.screens.common.views;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public abstract class BaseObservableViewMvc <ListenerType> extends BaseViewMvc
-        implements ObservableViewMvc<ListenerType>{
+        implements ObservableViewMvc<ListenerType> {
 
     private Set<ListenerType> mListener = new HashSet<>();
 

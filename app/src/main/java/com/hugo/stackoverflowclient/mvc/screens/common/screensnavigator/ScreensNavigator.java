@@ -1,4 +1,4 @@
-package com.hugo.stackoverflowclient.mvc.screens.common;
+package com.hugo.stackoverflowclient.mvc.screens.common.screensnavigator;
 
 import android.content.Context;
 

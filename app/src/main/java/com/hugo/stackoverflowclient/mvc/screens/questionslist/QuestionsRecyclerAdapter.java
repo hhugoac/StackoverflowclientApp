@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hugo.stackoverflowclient.mvc.questions.Question;
+import com.hugo.stackoverflowclient.mvc.screens.questionslist.questionslistitem.QuestionsListItemViewMvc;
+import com.hugo.stackoverflowclient.mvc.screens.questionslist.questionslistitem.QuestionsListItemViewMvcImpl;
 
 import java.util.ArrayList;
 import java.util.List;

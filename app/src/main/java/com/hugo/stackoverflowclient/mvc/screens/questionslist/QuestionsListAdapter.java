@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.Question;
+import com.hugo.stackoverflowclient.mvc.screens.questionslist.questionslistitem.QuestionsListItemViewMvc;
+import com.hugo.stackoverflowclient.mvc.screens.questionslist.questionslistitem.QuestionsListItemViewMvcImpl;
 
 public class QuestionsListAdapter extends ArrayAdapter<Question>
 implements QuestionsListItemViewMvc.Listener{

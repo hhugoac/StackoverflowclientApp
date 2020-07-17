@@ -1,4 +1,4 @@
-package com.hugo.stackoverflowclient.mvc.screens.common;
+package com.hugo.stackoverflowclient.mvc.screens.common.views;
 
 public interface ObservableViewMvc<ListenerType> extends ViewMvc {
 

@@ -1,4 +1,4 @@
-package com.hugo.stackoverflowclient.mvc.screens.common;
+package com.hugo.stackoverflowclient.mvc.screens.common.controllers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
