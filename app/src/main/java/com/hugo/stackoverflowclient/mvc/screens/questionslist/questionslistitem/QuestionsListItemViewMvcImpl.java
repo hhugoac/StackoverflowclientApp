@@ -3,6 +3,7 @@ package com.hugo.stackoverflowclient.mvc.screens.questionslist;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.hugo.stackoverflowclient.R;
@@ -17,9 +18,11 @@ public class QuestionsListItemViewMvcImpl
 
     private Question mQuestion;
 
+
     public QuestionsListItemViewMvcImpl(LayoutInflater inflater, ViewGroup parent) {
         setmRootView(inflater.inflate(R.layout.layout_question_list_item, parent, false));
         mTxtTitle = findViewById(R.id.txt_title);
+
         getRootView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
