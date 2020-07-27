@@ -11,7 +11,10 @@ import com.hugo.stackoverflowclient.mvc.questions.QuestionDetails;
 import com.hugo.stackoverflowclient.mvc.screens.common.controllers.BaseActivity;
 import com.hugo.stackoverflowclient.mvc.screens.common.toasthelper.ToastHelper;
 
-public class QuestionDetailsActivity extends BaseActivity implements FetchQuestionDetailsUseCase.Listener {
+public class QuestionDetailsActivity extends BaseActivity implements
+        FetchQuestionDetailsUseCase.Listener,
+        QuestionDetailsViewMvc.Listener
+{
 
     public static final String EXTRA_QUESTION_ID = "EXTRA_QUESTION_ID";
 
@@ -35,6 +38,7 @@ public class QuestionDetailsActivity extends BaseActivity implements FetchQuesti
     protected void onStart() {
         super.onStart();
         mFetchQuestionDetailsUseCase.registerListener(this);
+        mViewMvc.registerListener(this);
         mViewMvc.showProgressIndication();
         mFetchQuestionDetailsUseCase.fetchQuestionDetailsAndNotify(getQuestionId());
     }
@@ -43,6 +47,7 @@ public class QuestionDetailsActivity extends BaseActivity implements FetchQuesti
     protected void onStop() {
         super.onStop();
         mFetchQuestionDetailsUseCase.unregisterListener(this);
+        mViewMvc.unregisterListener(this);
     }
 
 
@@ -71,5 +76,10 @@ public class QuestionDetailsActivity extends BaseActivity implements FetchQuesti
     public void onQuestionsDetailsFetchFailed() {
         mViewMvc.hideProgressIndication();
         mToastHelper.showUseCaseError();
+    }
+
+    @Override
+    public void onNavigateUpClicked() {
+        onBackPressed();
     }
 }

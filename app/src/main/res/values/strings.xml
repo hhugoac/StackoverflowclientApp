@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Stackoverflow Client</string>
     <string name="error_network_call_failed">Error de red</string>
+    <string name="questions_list_screen_title">LATEST QUESTIONS</string>
+    <string name="question_detaisl_screen_title">QUESTION DETAILS</string>
+    <string name="drawer_menu_item_questions_list">Questions</string>
 </resources>

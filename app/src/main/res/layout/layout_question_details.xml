@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <include layout="@layout/element_toolbar"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
@@ -40,5 +46,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-</FrameLayout>
+    </FrameLayout>
+</LinearLayout>

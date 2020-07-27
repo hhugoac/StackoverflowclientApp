@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
+import com.hugo.stackoverflowclient.mvc.screens.common.toolbar.ToolbarViewMvc;
 import com.hugo.stackoverflowclient.mvc.screens.questiondetails.QuestionDetailsViewMvc;
 import com.hugo.stackoverflowclient.mvc.screens.questiondetails.QuestionDetailsViewMvcImpl;
 import com.hugo.stackoverflowclient.mvc.screens.questionslist.QuestionsListViewMvc;
@@ -19,10 +20,14 @@ public class ViewMvcFactory {
     }
 
     public QuestionsListViewMvc getQuestionListItemViewMvc(@Nullable ViewGroup parent) {
-        return new QuestionsListViewMvcImpl(mLayoutInflater, parent);
+        return new QuestionsListViewMvcImpl(mLayoutInflater, parent, this);
     }
 
     public QuestionDetailsViewMvc getQuestionDetailsViewMvc(@Nullable ViewGroup parent) {
-        return new QuestionDetailsViewMvcImpl(mLayoutInflater, parent);
+        return new QuestionDetailsViewMvcImpl(mLayoutInflater, parent, this);
+    }
+
+    public ToolbarViewMvc getToolbarViewMvc(@Nullable ViewGroup parent) {
+        return new ToolbarViewMvc(mLayoutInflater, parent);
     }
 }

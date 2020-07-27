@@ -7,22 +7,48 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.questions.QuestionDetails;
+import com.hugo.stackoverflowclient.mvc.screens.common.ViewMvcFactory;
+import com.hugo.stackoverflowclient.mvc.screens.common.toolbar.ToolbarViewMvc;
+import com.hugo.stackoverflowclient.mvc.screens.common.views.BaseObservableViewMvc;
 import com.hugo.stackoverflowclient.mvc.screens.common.views.BaseViewMvc;
 
-public class QuestionDetailsViewMvcImpl extends BaseViewMvc implements QuestionDetailsViewMvc {
+public class QuestionDetailsViewMvcImpl extends BaseObservableViewMvc<QuestionDetailsViewMvc.Listener> implements QuestionDetailsViewMvc {
 
+    private final ToolbarViewMvc mToolbarViewMvc;
+    private final Toolbar mToolbar;
     private final TextView mTxtQuestionTitle;
     private final TextView mTxtQuestionBody;
     private final ProgressBar mProgressBar;
 
-    public QuestionDetailsViewMvcImpl(LayoutInflater inflater, ViewGroup container) {
+    public QuestionDetailsViewMvcImpl(LayoutInflater inflater, ViewGroup container, ViewMvcFactory viewMvcFactory) {
         setmRootView(inflater.inflate(R.layout.layout_question_details, container, false));
 
         mTxtQuestionTitle = findViewById(R.id.txt_question_title);
         mTxtQuestionBody = findViewById(R.id.txt_question_body);
         mProgressBar = findViewById(R.id.progress);
+
+        mToolbar = findViewById(R.id.toolbar);
+        mToolbarViewMvc =viewMvcFactory.getToolbarViewMvc(mToolbar);
+
+        initToolbar();
+    }
+
+    private void initToolbar() {
+        mToolbar.addView(mToolbarViewMvc.getRootView());
+
+        mToolbarViewMvc.setTitle(getString(R.string.question_detaisl_screen_title));
+        mToolbarViewMvc.enableUpButtonAndListen(new ToolbarViewMvc.NavigateUpClickListener() {
+            @Override
+            public void onNavigateUpClicked() {
+                for(Listener lister: getListeners()) {
+                    lister.onNavigateUpClicked();
+                }
+            }
+        });
     }
 
     @Override
