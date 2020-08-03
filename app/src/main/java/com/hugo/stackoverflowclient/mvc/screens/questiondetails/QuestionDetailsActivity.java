@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import com.hugo.stackoverflowclient.mvc.questions.FetchQuestionDetailsUseCase;
 import com.hugo.stackoverflowclient.mvc.questions.QuestionDetails;
 import com.hugo.stackoverflowclient.mvc.screens.common.controllers.BaseActivity;
+import com.hugo.stackoverflowclient.mvc.screens.common.navdrawer.DrawerItems;
+import com.hugo.stackoverflowclient.mvc.screens.common.screensnavigator.ScreensNavigator;
 import com.hugo.stackoverflowclient.mvc.screens.common.toasthelper.ToastHelper;
 
 public class QuestionDetailsActivity extends BaseActivity implements
@@ -24,12 +26,14 @@ public class QuestionDetailsActivity extends BaseActivity implements
     private FetchQuestionDetailsUseCase mFetchQuestionDetailsUseCase;
 
     private ToastHelper mToastHelper;
+    private ScreensNavigator mScreensNavigator;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFetchQuestionDetailsUseCase = getCompositionRoot().getFetchQuestionDetailsUseCase();
         mToastHelper = getCompositionRoot().getMessageDisplayer();
+        mScreensNavigator = getCompositionRoot().getScreenNavigator();
         mViewMvc = getCompositionRoot().getViewMvcFactory().getQuestionDetailsViewMvc(null);
         setContentView(mViewMvc.getRootView());
     }
@@ -81,5 +85,22 @@ public class QuestionDetailsActivity extends BaseActivity implements
     @Override
     public void onNavigateUpClicked() {
         onBackPressed();
+    }
+
+    @Override
+    public void onDrawerItemClick(DrawerItems item) {
+        switch (item) {
+            case QUESTIONS_LIST:
+                mScreensNavigator.toQuestionsListClearTop();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mViewMvc.isDrawerOpen()) {
+            mViewMvc.closeDrawer();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

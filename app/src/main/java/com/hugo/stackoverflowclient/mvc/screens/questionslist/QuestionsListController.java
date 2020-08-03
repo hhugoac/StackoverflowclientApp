@@ -61,4 +61,13 @@ public class QuestionsListController implements QuestionsListViewMvcImpl.Listene
         mViewMvc.hideProgressIndication();
         mToastHelper.showUseCaseError();
     }
+
+    public boolean onBackPressed() {
+        if (mViewMvc.isDrawerOpen()) {
+            mViewMvc.closeDrawer();
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

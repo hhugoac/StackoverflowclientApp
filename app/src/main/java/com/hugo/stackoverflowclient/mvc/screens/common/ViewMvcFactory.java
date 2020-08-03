@@ -10,6 +10,8 @@ import com.hugo.stackoverflowclient.mvc.screens.questiondetails.QuestionDetailsV
 import com.hugo.stackoverflowclient.mvc.screens.questiondetails.QuestionDetailsViewMvcImpl;
 import com.hugo.stackoverflowclient.mvc.screens.questionslist.QuestionsListViewMvc;
 import com.hugo.stackoverflowclient.mvc.screens.questionslist.QuestionsListViewMvcImpl;
+import com.hugo.stackoverflowclient.mvc.screens.questionslist.questionslistitem.QuestionsListItemViewMvc;
+import com.hugo.stackoverflowclient.mvc.screens.questionslist.questionslistitem.QuestionsListItemViewMvcImpl;
 
 public class ViewMvcFactory {
 
@@ -19,9 +21,14 @@ public class ViewMvcFactory {
         this.mLayoutInflater = mLayoutInflater;
     }
 
-    public QuestionsListViewMvc getQuestionListItemViewMvc(@Nullable ViewGroup parent) {
+    public QuestionsListViewMvc getQuestionListViewMvc(@Nullable ViewGroup parent) {
         return new QuestionsListViewMvcImpl(mLayoutInflater, parent, this);
     }
+
+    public QuestionsListItemViewMvc getQuestionListItemViewMvc(@Nullable ViewGroup parent) {
+        return new QuestionsListItemViewMvcImpl(mLayoutInflater, parent);
+    }
+
 
     public QuestionDetailsViewMvc getQuestionDetailsViewMvc(@Nullable ViewGroup parent) {
         return new QuestionDetailsViewMvcImpl(mLayoutInflater, parent, this);

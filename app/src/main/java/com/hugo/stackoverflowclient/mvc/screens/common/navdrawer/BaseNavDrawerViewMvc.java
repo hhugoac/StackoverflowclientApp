@@ -15,14 +15,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.hugo.stackoverflowclient.R;
 import com.hugo.stackoverflowclient.mvc.screens.common.views.BaseObservableViewMvc;
 
-public abstract class BaseNavDrawerViewMvc<ListenerType> extends BaseObservableViewMvc<ListenerType> {
+public abstract class BaseNavDrawerViewMvc<ListenerType> extends BaseObservableViewMvc<ListenerType>
+        implements NavigationDrawerViewMvc{
 
     private final DrawerLayout mDrawerLayout;
     private final FrameLayout mFrameLayout;
     private final NavigationView mNavigationView;
 
     public BaseNavDrawerViewMvc(LayoutInflater inflater, @Nullable ViewGroup parent) {
-        setmRootView(inflater.inflate(R.layout.layout_drawer, parent, false));
+        super.setmRootView(inflater.inflate(R.layout.layout_drawer, parent, false));
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mFrameLayout = findViewById(R.id.frame_content);
         mNavigationView = findViewById(R.id.nav_view);
@@ -42,7 +43,18 @@ public abstract class BaseNavDrawerViewMvc<ListenerType> extends BaseObservableV
 
     protected abstract void onDrawerItemClicked(DrawerItems item);
 
-    protected void openDrawer() {
+    @Override
+    public boolean isDrawerOpen() {
+        return mDrawerLayout.isDrawerOpen(Gravity.START);
+    }
+
+    @Override
+    public void closeDrawer() {
+        mDrawerLayout.closeDrawers();
+    }
+
+    @Override
+    public void openDrawer() {
         mDrawerLayout.openDrawer(Gravity.START);
     }
 

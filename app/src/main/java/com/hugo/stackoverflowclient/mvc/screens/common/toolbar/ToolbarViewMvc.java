@@ -19,7 +19,6 @@ public class ToolbarViewMvc extends BaseViewMvc {
         void onHamburgerClicked();
     }
 
-
     private final TextView mTxtTitle;
     private final ImageButton mBtnBack;
     private final ImageButton mBtnHamburger;

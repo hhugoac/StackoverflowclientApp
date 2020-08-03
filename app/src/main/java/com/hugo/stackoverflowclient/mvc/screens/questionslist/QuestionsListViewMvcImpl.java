@@ -45,8 +45,7 @@ public class QuestionsListViewMvcImpl extends BaseNavDrawerViewMvc<QuestionsList
 
         mToolbar = findViewById(R.id.toolbar);
         mToolbarViewMvc = viewMvcFactory.getToolbarViewMvc(mToolbar);
-        mToolbarViewMvc.setTitle(getString(R.string.questions_list_screen_title));
-        mToolbar.addView(mToolbarViewMvc.getRootView());
+
         initToolbar();
     }
 
